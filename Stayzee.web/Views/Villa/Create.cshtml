@@ -1,0 +1,43 @@
+﻿@model Stayzee.Domain.Entities.Villa
+
+<div class="w-100 card border-0 p-4">
+    <div class="card-header bg-success bg-gradient py-0">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Create Villa</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body border p-4">
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="@Model.Name">Email address:</label>
+                <input asp-for="@Model.Name" type="text" class="form-control" id="inoutEmail" placeholder="Enter Name">
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Description">Description:</label>
+                <input asp-for="@Model.Description" type="text" class="form-control" placeholder="Enter Description">
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Price">Price:</label>
+                <input asp-for="@Model.Price" type="text" class="form-control" placeholder="Enter Price">
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Sqft">Sqft:</label>
+                <input asp-for="@Model.Sqft" type="text" class="form-control" placeholder="Enter Sqft">
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Occupancy">Occupancy:</label>
+                <input asp-for="@Model.Occupancy" type="text" class="form-control" placeholder="Enter Occupancy">
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.ImageUrl">ImageUrl:</label>
+                <input asp-for="@Model.ImageUrl" type="text" class="form-control" placeholder="Enter ImageUrl">
+            </div>
+            <div class="pt-2">
+                <button asp-action="Create12" type="submit" class="btn btn-primary"><i class="bi bi-check2-circle"></i> Submit</button>
+                <a class="btn btn-danger" asp-controller="Villa" asp-action="Index"><i class="bi bi-x-circle"></i> Close</a>
+            </div>
+        </form>
+    </div>
+</div>
