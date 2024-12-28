@@ -12,8 +12,8 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="form-text text-danger"></div>
             <div class="form-group">
-                <label asp-for="@Model.Name">Email address:</label>
-                <input asp-for="@Model.Name" type="text" class="form-control" id="inoutEmail" placeholder="Enter Name">
+                <label asp-for="@Model.Name">Name:</label>
+                <input asp-for="@Model.Name" type="text" class="form-control" placeholder="Enter Name">
                 <span asp-validation-for="@Model.Name" class="form-text text-danger"></span>
             </div>
             <div class="form-group">
@@ -47,3 +47,6 @@
         </form>
     </div>
 </div>
+@section scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
