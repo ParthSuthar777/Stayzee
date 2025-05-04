@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Stayzee.Domain.Entities.Rooms>
+
+<div class="w-100 card p-4 border-0">
+    <div class="card-header bg-success bg-gradient py-0">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="text-white">Rooms Listing</h1>
+            </div>
+        </div>
+    </div>
+    <div class="card-body border">
+        <div class="col-12 text-end">
+            <a asp-controller="Rooms" asp-action="CreateView" class="btn btn-success"><i class="bi bi-plus-circle"></i> Create</a>
+        </div>
+        <table class="table table-striped table-bordered mt-3">
+            <thead>
+                <tr>
+                    <th>Room Id</th>
+                    <th>Villa Id</th>
+                    <th>Villa Name</th>
+                    <th>Spesific Detail</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.RoomId</td>
+                        <td>@item.Villa_Id</td>
+                        <td>@item.VillaName</td>
+                        <td>@item.SpecificDetails</td>
+                        <td>
+                            <a asp-action="UpdateView" asp-controller="Rooms" asp-route-roomId="@item.RoomId" class="btn btn-primary"><i class="bi bi-pencil-square"></i> Edit</a>
+                            <a asp-action="Delete" asp-controller="Rooms" asp-route-roomId="@item.RoomId" class="btn btn-danger"><i class="bi bi-trash-fill"></i> Delete</a>
+                        </td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

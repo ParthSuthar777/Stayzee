@@ -1,0 +1,52 @@
+﻿@model Stayzee.Domain.Entities.Rooms;
+
+<div class="w-100 card p-4 border-0">
+    <div class="card-header bg-success bg-gradient py-0">
+        <div class="row ">
+            <div class="col-12 text-center ">
+                <h1 class="text-white">Create Room</h1>
+            </div>
+        </div>
+    </div>
+    <div class="card-body border">
+        <form method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label asp-for="RoomId"></label>
+                <input class="form-control" type="text" asp-for="RoomId" placeholder="" />
+                <span asp-validation-for="RoomId" class="form-text text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Villa_Id"></label>
+                <select asp-for="Villa_Id" asp-items="@new SelectList(ViewBag.VillaIdList)" id="dd_villa" class="form-control">
+                    <option disabled selected>---Select VillaId---</option>
+                </select>
+                @* <input class="form-control" type="text" asp-for="Villa_Id" placeholder="" /> *@
+                <span asp-validation-for="Villa_Id" class="form-text text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VillaName"></label>
+                <input class="form-control" type="text" readonly id="villaName" asp-for="VillaName" placeholder="" />
+                <span asp-validation-for="VillaName" class="form-text text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SpecificDetails"></label>
+                <input class="form-control" type="text" asp-for="SpecificDetails" placeholder="" />
+                <span asp-validation-for="SpecificDetails" class="form-text text-danger"></span>
+            </div>
+            <div class="mt-3 text-start">
+                <button class="btn btn-primary" type="submit" asp-action="Create" asp-controller="Rooms"><i class="bi bi-plus-circle-fill"></i> Submit</button>
+                <a asp-action="Index" asp-controller="Rooms" class="btn btn-danger"><i class="bi bi-x-circle-fill"></i> Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <partial name="_initPagePartial" />
+    <script>
+        $(document).ready(() => {
+            initPage();
+        });
+    </script>
+}

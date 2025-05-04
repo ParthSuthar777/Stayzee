@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Stayzee.Application\Stayzee.Application.csproj" />
     <ProjectReference Include="..\Stayzee.Domain\Stayzee.Domain.csproj" />
   </ItemGroup>
 

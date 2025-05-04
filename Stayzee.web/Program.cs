@@ -1,13 +1,17 @@
-using Microsoft.EntityFrameworkCore;
-using Stayzee.Infrastructure.Data;
+using Stayzee.Application;
+using Stayzee.Infrastructure;
+using Stayzee.web.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+// Add Infrastructure Services
+builder.Services.AddInfrastructureDI(builder.Configuration);
+// Add Application Services
+builder.Services.AddApplicationDI(builder.Configuration);
+
 
 var app = builder.Build();
 
@@ -18,7 +22,8 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-
+//User Middlerware 
+app.UseMiddleware<ExceptionHandlerMiddleware>();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
