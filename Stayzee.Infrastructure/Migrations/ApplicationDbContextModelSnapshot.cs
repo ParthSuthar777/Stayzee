@@ -22,6 +22,72 @@ namespace Stayzee.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("Stayzee.Domain.Entities.Rooms", b =>
+                {
+                    b.Property<int>("RoomId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SpecificDetails")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VillaName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Villa_Id")
+                        .HasColumnType("int");
+
+                    b.HasKey("RoomId");
+
+                    b.HasIndex("Villa_Id");
+
+                    b.ToTable("Rooms");
+
+                    b.HasData(
+                        new
+                        {
+                            RoomId = 101,
+                            SpecificDetails = "Ocean view, private balcony",
+                            VillaName = "Royal Villa",
+                            Villa_Id = 1
+                        },
+                        new
+                        {
+                            RoomId = 102,
+                            SpecificDetails = "Ground floor, garden access",
+                            VillaName = "Royal Villa",
+                            Villa_Id = 1
+                        },
+                        new
+                        {
+                            RoomId = 201,
+                            SpecificDetails = "Direct beach access",
+                            VillaName = "Beachfront Villa",
+                            Villa_Id = 2
+                        },
+                        new
+                        {
+                            RoomId = 202,
+                            SpecificDetails = "Upper floor, sea view",
+                            VillaName = "Beachfront Villa",
+                            Villa_Id = 2
+                        },
+                        new
+                        {
+                            RoomId = 301,
+                            SpecificDetails = "Private pool, king bed",
+                            VillaName = "Luxury Pool Villa",
+                            Villa_Id = 3
+                        },
+                        new
+                        {
+                            RoomId = 302,
+                            SpecificDetails = "Jacuzzi, garden view",
+                            VillaName = "Luxury Pool Villa",
+                            Villa_Id = 3
+                        });
+                });
+
             modelBuilder.Entity("Stayzee.Domain.Entities.Villa", b =>
                 {
                     b.Property<int>("Id")
@@ -63,7 +129,7 @@ namespace Stayzee.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 12, 23, 22, 3, 38, 54, DateTimeKind.Local).AddTicks(6579),
+                            CreatedDate = new DateTime(2025, 5, 3, 18, 6, 35, 315, DateTimeKind.Local).AddTicks(3895),
                             Description = "Fusce 11 tincidunt maximus leo, sed scelerisque massa auctor sit amet. Donec ex mauris, hendrerit quis nibh ac, efficitur fringilla enim.",
                             ImageUrl = "https://placehold.co/600x400",
                             Name = "Royal Villa",
@@ -74,7 +140,7 @@ namespace Stayzee.Infrastructure.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2024, 12, 23, 22, 3, 38, 61, DateTimeKind.Local).AddTicks(4292),
+                            CreatedDate = new DateTime(2025, 5, 3, 18, 6, 35, 316, DateTimeKind.Local).AddTicks(9237),
                             Description = "Fusce 11 tincidunt maximus leo, sed scelerisque massa auctor sit amet. Donec ex mauris, hendrerit quis nibh ac, efficitur fringilla enim.",
                             ImageUrl = "https://placehold.co/600x401",
                             Name = "Premium Pool Villa",
@@ -85,7 +151,7 @@ namespace Stayzee.Infrastructure.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2024, 12, 23, 22, 3, 38, 61, DateTimeKind.Local).AddTicks(4338),
+                            CreatedDate = new DateTime(2025, 5, 3, 18, 6, 35, 316, DateTimeKind.Local).AddTicks(9252),
                             Description = "Fusce 11 tincidunt maximus leo, sed scelerisque massa auctor sit amet. Donec ex mauris, hendrerit quis nibh ac, efficitur fringilla enim.",
                             ImageUrl = "https://placehold.co/600x402",
                             Name = "Luxury Pool Villa",
@@ -93,6 +159,17 @@ namespace Stayzee.Infrastructure.Migrations
                             Price = 400.0,
                             Sqft = 750
                         });
+                });
+
+            modelBuilder.Entity("Stayzee.Domain.Entities.Rooms", b =>
+                {
+                    b.HasOne("Stayzee.Domain.Entities.Villa", "Villa")
+                        .WithMany()
+                        .HasForeignKey("Villa_Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Villa");
                 });
 #pragma warning restore 612, 618
         }

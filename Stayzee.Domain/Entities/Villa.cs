@@ -26,6 +26,5 @@ namespace Stayzee.Domain.Entities
         public string? ImageUrl { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.Now;
         public DateTime? UpdatedDate { get; set; }
-
     }
 }

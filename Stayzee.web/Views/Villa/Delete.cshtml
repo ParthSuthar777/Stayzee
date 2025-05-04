@@ -1,0 +1,48 @@
+﻿@model Stayzee.Domain.Entities.Villa;
+
+<div class="w-100">
+    <div class="card border-0 p-4">
+        <div class="card-header bg-success bg-gradient py-0">
+            <div action="row">
+                <div class="col-12 text-center">
+                    <h1 class="text-white">Delete Villa</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body border p-4">
+            <form method="post" enctype="multipart/form-data">
+                <input asp-for="@Model.Id" hidden />
+                <div class="form-group">
+                    <label asp-for="@Model.Name">Name:</label>
+                    <input type="text" disabled asp-for="@Model.Name" class="form-control" placeholder="Enter Name" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Description">Description:</label>
+                    <input asp-for="@Model.Description" disabled type="text" class="form-control" placeholder="Enter Description" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Price">Price:</label>
+                    <input asp-for="@Model.Price" disabled type="text" class="form-control" placeholder="Enter Price" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Sqft">SqFt:</label>
+                    <input asp-for="@Model.Sqft" disabled type="text" class="form-control" placeholder="Enter Sqft" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Occupancy">Occupancy:</label>
+                    <input asp-for="@Model.Occupancy" disabled type="number" class="form-control" placeholder="Enter Occupancy" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.ImageUrl">ImageUrl:</label>
+                    <input asp-for="@Model.ImageUrl" disabled type="text" class="form-control" placeholder="Enter ImageUrl" />
+                </div>
+                <div class="pt-4">
+                    <button class="btn btn-danger" type="submit" asp-controller="Villa" asp-action="Delete"><i class=" bi bi-trash-fill"></i> Delete</button>
+                    <a asp-action="Index" asp-controller="Villa" class="btn btn-danger"> <i class="bi bi-x-circle-fill"></i> Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Stayzee.Application.ServiceContract;
 using Stayzee.Domain.Entities;
 using Stayzee.Infrastructure.Data;
 
@@ -6,19 +7,19 @@ namespace Stayzee.web.Controllers
 {
     public class VillaController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IVillaService _villaService;
 
-        public VillaController(ApplicationDbContext context)
+        public VillaController(IVillaService villaService)
         {
-            _context = context;
+            _villaService = villaService;
         }
         /// <summary>
         /// Villa List View
         /// </summary>
         /// <returns></returns>
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var villas = _context.Villas.ToList();
+            var villas = await _villaService.GetAllAsync();
             return View(villas);
         }
         /// <summary>
@@ -50,11 +51,53 @@ namespace Stayzee.web.Controllers
 
             if (ModelState.IsValid)
             {
-                _context.Villas.Add(villa);
-                _context.SaveChanges();
+                _villaService.AddVillaAsync(villa);
                 return RedirectToAction("Index", "Villa");
             }
             return View(villa);
+        }
+        [HttpGet]
+        public async Task<IActionResult> Update(int villaId)
+        {
+            Villa? villa = await _villaService.GetAsync(villaId);
+            if (villa == null)
+            {
+                return NotFound();
+            }
+            return View(villa);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Update(Villa villa)
+        {
+            if (ModelState.IsValid)
+            {
+                await _villaService.UpdateVillaAsync(villa);
+                TempData["success"] = "Villa successfully updated";
+                return RedirectToAction("Index", "Villa");
+            }
+            return View();
+        }
+        [HttpGet]
+        public async Task<IActionResult> Delete(int villaId)
+        {
+            Villa? villa = await _villaService.GetAsync(villaId);
+            if (villa == null)
+            {
+                return NotFound();
+            }
+            return View(villa);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Delete(Villa villa)
+        {
+            Villa? obj = await _villaService.GetAsync(villa.Id);
+            if (obj != null)
+            {
+                await _villaService.DeleteVillaAsync(villa.Id);
+                TempData["success"] = "Villa successfully deleted";
+                return RedirectToAction("Index", "Villa");
+            }
+            return View();
         }
     }
 }

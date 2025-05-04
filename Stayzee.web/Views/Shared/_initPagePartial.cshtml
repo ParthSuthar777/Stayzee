@@ -1,0 +1,27 @@
+﻿<script>
+    function initPage() {
+        getVillaName();
+        //Event Handlers
+        $('#dd_villa').change(() => {
+            getVillaName();
+        })
+    }
+    function getVillaName() {
+        const villaId = $('#dd_villa').val();
+        $('#villaName').val("");
+
+        if (villaId) {
+            var url = `/Rooms/GetRoomsByVillaId?villaId=${villaId}`;
+            $.ajax({
+                url: url,
+                type: "GET",
+                success: (data) => {
+                    $('#villaName').val(data);
+                },
+                error: (err) => {
+                    console.log('API calls failed' + err);
+                }
+            })
+        }
+    }
+</script>
